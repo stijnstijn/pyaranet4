@@ -1,7 +1,7 @@
 # pyaranet4 - Interface with your Aranet4 CO₂ meter via Python
 
-[![PyPI version](https://img.shields.io/pypi/v/pyaranet4.svg?logo=pypi&logoColor=FFE873)](https://pypi.org/project/prettytable/)
-[![Supported Python versions](https://img.shields.io/pypi/pyversions/pyaranet4.svg?logo=python&logoColor=FFE873)](https://pypi.org/project/pyaranet4/)
+[![PyPI version](https://img.shields.io/pypi/v/pyaranet4?logo=pypi&logoColor=FFE873)](https://pypi.org/project/pyaranet4/)
+[![Supported Python versions](https://img.shields.io/pypi/pyversions/pyaranet4?logo=python&logoColor=FFE873)](https://pypi.org/project/pyaranet4/)
 
 This is a cross-platform interface for the [Aranet4](https://aranet4.com/) CO₂ meter. You can use it to  read values 
 from the meter to then store in a database, display on a website, or generally do with whatever you want. Since the 
