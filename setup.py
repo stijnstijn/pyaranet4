@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyaranet4",
-    version="1.0.0b",
+    version="1.0.0b2",
     author="Stijn Peeters",
     author_email="a4@stijnpeeters.nl",
     description="A cross-platform Python interface for the Aranet4 CO₂ meter",
