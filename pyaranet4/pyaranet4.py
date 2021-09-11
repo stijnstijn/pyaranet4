@@ -287,10 +287,10 @@ class Aranet4:
         values.temperature = self._normalize_value(le16(data, 2), self.SENSOR_TEMPERATURE)
         values.pressure = self._normalize_value(le16(data, 4), self.SENSOR_PRESSURE)
         values.humidity = self._normalize_value(data[6], self.SENSOR_HUMIDITY)
-        values.battery = data[7]
+        values.battery_level = data[7]
 
         if not simple:
-            values.interval = le16(data, 9)
+            values.update_interval = le16(data, 9)
             values.since_last_update = le16(data, 11)
 
         return values
@@ -387,7 +387,7 @@ class Aranet4:
 
         interval = le16(await self._client.read_gatt_char(self.UUID_UPDATE_INTERVAL))
         for sensor in sensors:
-            logging.debug("Retrieving stored values for sensor %i" % sensor)
+            logging.debug("Retrieving stored values for sensor %s" % str(sensor))
             params[1] = sensor
 
             last_timestamp = round(time.time()) - le16(
@@ -421,7 +421,7 @@ class Aranet4:
             sensor_data = readings.__getattribute__(sensor).copy()
             for key in sensor_data:
                 if key not in common_indexes:
-                    logging.debug("Discarding one uncommon datapoint from sensor %i" % sensor)
+                    logging.debug("Discarding one uncommon datapoint from sensor %s" % str(sensor))
                     del readings.__getattribute__(sensor)[key]
 
         # now convert indexes to timestamps
@@ -454,7 +454,7 @@ class Aranet4:
                     self._address = device.address
 
         if not self._address:
-            raise Aranet4NotFoundException()
+            raise Aranet4NotFoundException("No Aranet4 device found. Try moving it closer to the Bluetooth receiver.")
 
         logging.info("Connecting to device %s" % self._address)
         self._client = BleakClient(self._address)

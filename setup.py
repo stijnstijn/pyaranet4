@@ -12,7 +12,10 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/stijnstijn/pyaranet4",
-    packages=setuptools.find_packages(),
+    packages=[
+        "requests~=2.25",
+        "bleak~=0.12"
+    ],
     include_package_data=True,
     entry_points={'console_scripts': ['pyaranet4=pyaranet4.__main__:main']},
     license="MIT",

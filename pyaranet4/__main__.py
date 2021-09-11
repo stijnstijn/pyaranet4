@@ -39,20 +39,20 @@ def main():
     if not args.address:
         args.address = None
 
-    # Map "thpc"-like sensor value as provided to actual sensor IDs
     a4 = Aranet4(args.address)
-    sensor_map = {"t": Aranet4.SENSOR_TEMPERATURE, "h": Aranet4.SENSOR_HUMIDITY, "p": Aranet4.SENSOR_PRESSURE,
-                  "c": Aranet4.SENSOR_CO2}
-    sensors = tuple([sensor_map[c] for c in re.sub(r"[^thpc]", "", args.params)])
-    if not sensors:
-        print("Must include at least one valid sensor")
-        exit(1)
-
     if args.url:
         post_data(a4, args.url)
         exit(0)
 
-    elif args.history or args.limit or args.output_file or args.params:
+    elif args.history or args.limit or args.output_file:
+        # Map "thpc"-like sensor value as provided to actual sensor IDs
+        sensor_map = {"t": a4.SENSOR_TEMPERATURE, "h": a4.SENSOR_HUMIDITY, "p": a4.SENSOR_PRESSURE,
+                      "c": a4.SENSOR_CO2}
+        sensors = tuple([sensor_map[c] for c in re.sub(r"[^thpc]", "", args.params)])
+        if not sensors:
+            print("Must include at least one valid sensor")
+            exit(1)
+
         collect_data(a4, args, sensors)
         exit(0)
 
