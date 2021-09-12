@@ -15,6 +15,7 @@ setuptools.setup(
     include_package_data=True,
     entry_points={'console_scripts': ['pyaranet4=pyaranet4.__main__:main']},
     license="MIT",
+    packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
