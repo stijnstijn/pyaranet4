@@ -17,6 +17,9 @@ bleak = "^0.19.0"
 
 [tool.poetry.dev-dependencies]
 
+[tool.poetry.scripts]
+main = "pyaranet4.__main__:main"
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
