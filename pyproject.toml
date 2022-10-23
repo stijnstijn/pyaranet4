@@ -9,7 +9,7 @@ build-backend = "setuptools.build_meta"
 name = "pyaranet4"
 description = "A cross-platform Python interface for the Aranet4 CO₂ meter"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.6"
 license = {text = "MIT License"}
 classifiers = [
     "License :: OSI Approved :: MIT License",
