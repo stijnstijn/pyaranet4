@@ -449,7 +449,9 @@ class Aranet4:
             logging.debug("No MAC address known, starting discovery")
             devices = await BleakScanner.discover()
             for device in devices:
-                if device.name is not None and self._magic in device.name:
+                if device.name is None:
+                    continue
+                if self._magic in device.name:
                     logging.info("Found MAC address %s for device %s" % (device.address, device.name))
                     self._address = device.address
 

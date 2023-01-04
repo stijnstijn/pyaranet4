@@ -77,7 +77,7 @@ def basic_overview(a4):
     print("Temperature: {:.2f} C".format(a4.current_readings.temperature))
     print("Humidity:    {:d} %".format(a4.current_readings.humidity))
     print("Pressure:    {:.2f} hPa".format(a4.current_readings.pressure))
-    print("Battery:     {:d} %".format(a4.current_readings.battery))
+    print("Battery:     {:d} %".format(a4.current_readings.battery_level))
     print("--------------------------------------")
     exit()
 
@@ -97,7 +97,7 @@ def post_data(a4, url):
         'temperature': values.temperature,
         'pressure': values.pressure,
         'humidity': values.humidity,
-        'battery': values.battery
+        'battery': values.battery_level
     })
 
 
