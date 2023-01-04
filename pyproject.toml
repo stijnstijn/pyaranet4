@@ -20,6 +20,8 @@ dependencies = [
     "requests == 2.28.1"
 ]
 dynamic = ["version"]
+
+
 [project.scripts]
 pyaranet4 = "pyaranet4.__main__:main"
 
