@@ -470,8 +470,7 @@ class Aranet4:
         :param uuid:  UUID of attribute to read from
         :return bytearray:  Returned value
         """
-        if not self._address:
-            await self._discover()
+        await self._discover()
 
         try:
             value = await self._client.read_gatt_char(uuid)
