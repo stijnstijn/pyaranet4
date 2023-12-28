@@ -437,6 +437,16 @@ class Aranet4:
         readings.sensors = included_keys
         return readings
 
+    async def _connect(self, address):
+        """
+        Initialize BleakClient object to a given address and connect to device
+
+        :param str address:  MAC address of the device to connect to
+        """
+        logging.info("Connecting to device %s" % self._address)
+        self._client = BleakClient(address)
+        await self._client.connect(timeout=15)
+
     async def _discover(self):
         """
         Discover Aranet4 device and initialise client
@@ -458,9 +468,7 @@ class Aranet4:
         if not self._address:
             raise Aranet4NotFoundException("No Aranet4 device found. Try moving it closer to the Bluetooth receiver.")
 
-        logging.info("Connecting to device %s" % self._address)
-        self._client = BleakClient(self._address)
-        await self._client.connect(timeout=15)
+        await self._connect(self._address)
         return self._address
 
     async def _read_value(self, uuid):
@@ -470,11 +478,15 @@ class Aranet4:
         :param uuid:  UUID of attribute to read from
         :return bytearray:  Returned value
         """
-        await self._discover()
+        if not self._address:
+            await self._discover()
+
+        if not self._client or not self._client.is_connected:
+            await self._connect(self._address)
 
         try:
             value = await self._client.read_gatt_char(uuid)
         except BleakError as e:
-            raise Aranet4UnpairedException("Error reading from device. Check if it is properly paired.")
+            raise Aranet4UnpairedException(f"Error reading from device. Check if it is properly paired: {e}")
 
         return value
